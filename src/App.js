@@ -1,9 +1,22 @@
+import { ThemeProvider } from 'styled-components';
+import { LightTheme } from './themes/LightTheme';
+import GlobalStyles from './styles/Global';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Main from './pages/Main';
+import Sidebar from './components/Sidebar';
+
 
 function App() {
   return (
-    <div>
-      Hello World
-    </div>
+    <ThemeProvider theme={LightTheme}>
+      <Router>
+        <GlobalStyles />
+        <div>
+          <Sidebar />
+          <Main />
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 
