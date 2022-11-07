@@ -54,6 +54,24 @@ const Sidebar = () => {
         })
     }
 
+    const showTooltip = (id) => {
+        const sidebar = document.querySelector('#sidebar');
+        const sidebarWidth = window.getComputedStyle(sidebar).width;
+        if (sidebarWidth === '60px') {
+            const tooltip = document.querySelector(`#${id}`);
+            tooltip.classList.add('active');
+        }
+    }
+
+    const hideTooltip = (id) => {
+        const sidebar = document.querySelector('#sidebar');
+        const sidebarWidth = window.getComputedStyle(sidebar).width;
+        if (sidebarWidth === '60px') {
+            const tooltip = document.querySelector(`#${id}`);
+            tooltip.classList.remove('active');
+        }
+    }
+
     return (
         <SidebarStyled id="sidebar">
             <SidebarUL>
@@ -68,7 +86,10 @@ const Sidebar = () => {
                         <FontAwesomeIcon icon={faClose} />
                     </span>
                 </BrandLi>
-                <Li className="active">
+                <Li className="active"
+                    onMouseEnter={() => showTooltip('dashboardTooltip')}
+                    onMouseLeave={() => hideTooltip('dashboardTooltip')}
+                >
                     <Link to="/">
                         <span>
                             <FontAwesomeIcon icon={faHome} />
@@ -76,7 +97,10 @@ const Sidebar = () => {
                         <span>Dashboard</span>
                     </Link>
                 </Li>
-                <Li>
+                <Li
+                    onMouseEnter={() => showTooltip('servicesTooltip')}
+                    onMouseLeave={() => hideTooltip('servicesTooltip')}
+                >
                     <Link to="/services">
                         <span>
                             <FontAwesomeIcon icon={faHandHoldingMedical} />
@@ -84,7 +108,10 @@ const Sidebar = () => {
                         <span>Services</span>
                     </Link>
                 </Li>
-                <Li>
+                <Li
+                    onMouseEnter={() => showTooltip('doctorsTooltip')}
+                    onMouseLeave={() => hideTooltip('doctorsTooltip')}
+                >
                     <Link to="/doctors">
                         <span>
                             <FontAwesomeIcon icon={faUserDoctor} />
@@ -92,7 +119,10 @@ const Sidebar = () => {
                         <span>Doctors</span>
                     </Link>
                 </Li>
-                <Li>
+                <Li
+                    onMouseEnter={() => showTooltip('appointmentsTooltip')}
+                    onMouseLeave={() => hideTooltip('appointmentsTooltip')}
+                >
                     <Link to="/appointments">
                         <span>
                             <FontAwesomeIcon icon={faCalendarCheck} />
@@ -100,7 +130,10 @@ const Sidebar = () => {
                         <span>Appoinments</span>
                     </Link>
                 </Li>
-                <Li>
+                <Li
+                    onMouseEnter={() => showTooltip('emailsTooltip')}
+                    onMouseLeave={() => hideTooltip('emailsTooltip')}
+                >
                     <Link to="/emails">
                         <span>
                             <FontAwesomeIcon icon={faEnvelope} />
@@ -109,7 +142,7 @@ const Sidebar = () => {
                     </Link>
                 </Li>
             </SidebarUL>
-        </SidebarStyled>
+        </SidebarStyled >
     )
 }
 
