@@ -14,6 +14,8 @@ export const NavbarStyled = styled.nav`
     height: 50px;
     background: ${({ theme }) => theme.colors.secBg};
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
 
     @media (max-width: 1199px) {
         grid-template-columns: 2fr 5fr 3fr;
@@ -108,7 +110,7 @@ export const NavLinks = styled.div`
     ul {
         display: flex;
         justify-content: flex-end;
-        align-items: center;
+        align-items: flex-end;
 
         padding: 0;
         margin: 0;
@@ -121,11 +123,14 @@ export const NavLinks = styled.div`
 
         margin-left: 25px;
         cursor: pointer;
-        color: #D3D3D3;
         font-size: 18px;
     }
 
-    ul li:nth-child(1) span {
+    ul li svg {
+        color: #b5b1b1;
+    }
+
+    ul li:nth-child(1) > span {
         position: absolute;
         top: -5px;
         left: 100%;
@@ -136,7 +141,7 @@ export const NavLinks = styled.div`
         background: rgb(248, 196, 113);
     } 
 
-    ul li:nth-child(2) span {
+    ul li:nth-child(2) > span {
         position: absolute;
         top: -4px;
         left: 90%;
@@ -156,7 +161,7 @@ export const NavLinks = styled.div`
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     }
 
-    ul li:last-child span {
+    ul li:last-child > span {
         position: absolute;
         bottom: -1px;
         left: 60%;
@@ -168,6 +173,14 @@ export const NavLinks = styled.div`
         // for offline
         /* background: #ABB0B8; */
     } 
+
+    /* ul li:hover svg {
+        color: ${({ theme }) => theme.colors.mainColor};
+    } */
+
+    /* ul li:hover div {
+        display: block;
+    } */
 
     @media (max-width: 1199px) {
         ul li {

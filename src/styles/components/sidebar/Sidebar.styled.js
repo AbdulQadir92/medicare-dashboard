@@ -16,7 +16,7 @@ export const SidebarStyled = styled.div`
     min-height: 100vh;
     padding-left: 10px;
     background: ${({ theme }) => theme.colors.secBg};
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     overflow: hidden;
     transition: 0.3s;
 

@@ -3,7 +3,7 @@ import { LightTheme } from './themes/LightTheme';
 import GlobalStyles from './styles/Global';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Main from './pages/Main';
-import Sidebar from './components/Sidebar';
+import Sidebar from './components/sidebar/Sidebar';
 
 
 function App() {

@@ -7,8 +7,8 @@ import Doctors from './Doctors';
 import Appoinments from './Appointments';
 import Emails from './Emails';
 
-import Navbar from '../components/Navbar';
-import SidebarTooltip from '../components/SidebarTooltip';
+import Navbar from '../components/navbar/Navbar';
+import SidebarTooltip from '../components/sidebar/SidebarTooltip';
 
 
 const Main = () => {

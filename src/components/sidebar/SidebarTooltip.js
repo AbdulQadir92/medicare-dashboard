@@ -1,4 +1,4 @@
-import { TooltipStyled } from '../styles/components/SidebarTooltip.styled';
+import { TooltipStyled } from '../../styles/components/sidebar/SidebarTooltip.styled';
 
 
 const SidebarTooltip = ({ name, top, id }) => {

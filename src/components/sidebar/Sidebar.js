@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { SidebarStyled, SidebarUL, BrandLi, Li } from "../styles/components/Sidebar.styled";
+import { SidebarStyled, SidebarUL, BrandLi, Li } from "../../styles/components/sidebar/Sidebar.styled";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartPulse, faHome, faHandHoldingMedical, faUserDoctor, faCalendarCheck, faEnvelope, faClose } from '@fortawesome/free-solid-svg-icons';
