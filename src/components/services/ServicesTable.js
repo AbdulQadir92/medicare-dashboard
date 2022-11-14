@@ -5,9 +5,25 @@ import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 
 const ServicesTable = ({ services, fillForm, handleDelete }) => {
+    const search = (e) => {
+        const trs = document.querySelectorAll('#servicesTbody tr');
+
+        const value = e.target.value.toLocaleLowerCase();
+
+        trs.forEach((tr) => {
+            const text = tr.textContent.toLocaleLowerCase();
+            if (text.indexOf(value) !== -1) {
+                tr.style.display = '';
+            } else {
+                tr.style.display = 'none';
+            }
+        })
+    }
+
     return (
         <ServicesTableStyled>
             <h2>Services</h2>
+            <input type="search" placeholder="Search" onChange={search} />
             <Table>
                 <Thead>
                     <tr>
@@ -16,13 +32,12 @@ const ServicesTable = ({ services, fillForm, handleDelete }) => {
                         <th>Description</th>
                     </tr>
                 </Thead>
-                <Tbody id="tbody">
+                <Tbody id="servicesTbody">
                     {services && services.map((service, index) => (
                         <tr key={index}>
-                            <td data-title>{service.serviceTitle}</td>
+                            <td>{service.serviceTitle}</td>
                             <td>
                                 <img src={service.serviceImg} alt="..." width="40" height="40" />
-                                {/* <span>{service.serviceImg}</span> */}
                             </td>
                             <td>
                                 <div>

@@ -129,6 +129,7 @@ const Navbar = () => {
         }
     }
 
+
     return (
         <NavbarStyled>
             <Icon>

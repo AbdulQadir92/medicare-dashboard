@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 
 export const ServicesTableStyled = styled.div`
+    position: relative;
+
     width: 100%;
     overflow: auto;
 
@@ -9,6 +11,26 @@ export const ServicesTableStyled = styled.div`
         text-align: center;
         margin-bottom: 20px;
         font-size: 25px;
+    }
+
+    & > input {
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        width: 250px;
+    }
+
+    @media (max-width: 991px) {
+        & > h2 {
+            text-align: left;
+        }
+    }
+
+    @media (max-width: 575px) {
+        & > input {
+            width: 150px;
+        }
     }
 `
 
