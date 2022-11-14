@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const ServicesTableStyled = styled.div`
+export const DoctorsTableStyled = styled.div`
     position: relative;
 
     width: 100%;
@@ -40,10 +40,6 @@ export const Table = styled.table`
     background: ${({ theme }) => theme.colors.secBg};
     padding: 5px;
     min-width: 700px;
-
-    @media (max-width: 575px) {
-        min-width: 500px;
-    }
 `
 
 export const Thead = styled.thead`
@@ -74,22 +70,22 @@ export const Tbody = styled.tbody`
     }
 
     td:nth-child(1) {
-        width: 11%;
+        width: 6%;
     }
 
     td:nth-child(2) {
-        width: 11%;
+        width: 15%;
     }
 
     td:nth-child(3) {
-        width: 100%;
-        font-size: 15.5px;
-
-        display: grid;
-        grid-gap: 15px;
+        width: 15%;
     }
 
     td:nth-child(4) {
+        width: 61%;
+    }
+
+    td:nth-child(5) {
         position: relative;
         width: 3%;
 
@@ -101,6 +97,7 @@ export const Tbody = styled.tbody`
             display: grid;
             justify-content: center;
             grid-row-gap: 10px;
+
 
             svg {
                 font-size: 18px;

@@ -1,8 +1,9 @@
-import ServicesTable from "../components/services/ServicesTable";
 import { useState } from "react";
 import { ServicesFormStyled } from "../styles/components/services/ServicesForm.styled";
+import ServicesTable from "../components/services/ServicesTable";
 import Button from '../components/Button';
 import SecondaryBtn from "../components/SecondaryBtn";
+
 import heartBeat from '../images/services/heartBeat.png';
 import eyeCare from '../images/services/eyeCare.png';
 import dentistry from '../images/services/dentistry.png';
