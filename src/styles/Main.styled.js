@@ -7,7 +7,6 @@ export const MainStyled = styled.div`
 
     width: calc(100% - 220px);
 
-
     min-height: 100vh;
     background: ${({ theme }) => theme.colors.mainBg};
     transition: 0.3s;
@@ -39,5 +38,5 @@ export const MainStyled = styled.div`
 `
 
 export const PagesContainer = styled.div`
-    padding: 0 20px;
+    padding: 20px;
 `

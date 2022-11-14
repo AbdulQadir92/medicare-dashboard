@@ -8,7 +8,7 @@ export const SidebarStyled = styled.div`
         box-sizing: border-box;
     }
 
-    position: absolute;
+    position: fixed;
     z-index: 1000;
     
     width: 220px;
