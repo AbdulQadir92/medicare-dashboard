@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const DoctorsTableStyled = styled.div`
+export const AppointmentsTableStyled = styled.div`
     position: relative;
 
     width: 100%;
@@ -69,23 +69,7 @@ export const Tbody = styled.tbody`
         padding: 15px;
     }
 
-    td:nth-child(1) {
-        width: 6%;
-    }
-
-    td:nth-child(2) {
-        width: 15%;
-    }
-
-    td:nth-child(3) {
-        width: 15%;
-    }
-
-    td:nth-child(4) {
-        width: 61%;
-    }
-
-    td:nth-child(5) {
+    td:nth-child(7) {
         position: relative;
         width: 3%;
 

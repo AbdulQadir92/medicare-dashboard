@@ -23,7 +23,7 @@ const GlobalStyles = createGlobalStyle`
         font-size: 14px;
     }
 
-    input, textarea {
+    input, textarea, select {
         display: block;
         width: 100%;
         border: 1px solid rgba(150, 150, 150, 0.5);

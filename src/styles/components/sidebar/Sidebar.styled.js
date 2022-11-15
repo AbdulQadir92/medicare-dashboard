@@ -97,6 +97,7 @@ export const Li = styled.li`
         grid-template-columns: 1fr 4fr;
         align-items: center;
 
+        width: 100%;
         text-decoration: none;
         color: ${({ theme }) => theme.colors.mainColor};
     }
@@ -105,6 +106,16 @@ export const Li = styled.li`
         color: ${({ theme }) => theme.colors.mainColor};
         font-size: 20px;
         padding-right: 17px;
+    }
+
+    &:nth-child(4) a span:first-child, 
+    &:nth-child(5) a span:first-child
+    {
+        padding-right: 22px;
+    }
+
+    &:nth-child(6) a span:first-child {
+        padding-right: 19px;
     }
 
     a span:last-child {

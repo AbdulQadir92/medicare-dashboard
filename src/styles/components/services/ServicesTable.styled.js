@@ -103,7 +103,7 @@ export const Tbody = styled.tbody`
             grid-row-gap: 10px;
 
             svg {
-                font-size: 18px;
+                font-size: 16px;
                 cursor: pointer;
             }
 

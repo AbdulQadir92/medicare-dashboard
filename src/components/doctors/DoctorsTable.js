@@ -21,44 +21,46 @@ const DoctorsTable = ({ doctors, fillForm, handleDelete }) => {
     }
 
     return (
-        <DoctorsTableStyled>
-            <h2>Doctors</h2>
-            <input type="search" placeholder="Search" onChange={search} />
-            <Table>
-                <Thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Designation</th>
-                        <th>Description</th>
-                    </tr>
-                </Thead>
-                <Tbody id="doctorsTbody">
-                    {doctors && doctors.map((doctor, index) => (
-                        <tr key={index}>
-                            <td>
-                                <img src={doctor.doctorImg} alt="..." width="40" height="40" />
-                            </td>
-                            <td>
-                                {doctor.doctorName}
-                            </td>
-                            <td>
-                                {doctor.designation}
-                            </td>
-                            <td>
-                                {doctor.description}
-                            </td>
-                            <td>
-                                <div>
-                                    <FontAwesomeIcon icon={faPenToSquare} onClick={fillForm} title="Edit" />
-                                    <FontAwesomeIcon icon={faTrash} onClick={handleDelete} title="Delete" />
-                                </div>
-                            </td>
+        <>
+            <DoctorsTableStyled>
+                <h2>Doctors</h2>
+                <input type="search" placeholder="Search" onChange={search} />
+                <Table>
+                    <Thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Designation</th>
+                            <th>Description</th>
                         </tr>
-                    ))}
-                </Tbody>
-            </Table>
-        </DoctorsTableStyled>
+                    </Thead>
+                    <Tbody id="doctorsTbody">
+                        {doctors && doctors.map((doctor, index) => (
+                            <tr key={index}>
+                                <td>
+                                    <img src={doctor.doctorImg} alt="..." width="40" height="40" />
+                                </td>
+                                <td>
+                                    {doctor.doctorName}
+                                </td>
+                                <td>
+                                    {doctor.designation}
+                                </td>
+                                <td>
+                                    {doctor.description}
+                                </td>
+                                <td>
+                                    <div>
+                                        <FontAwesomeIcon icon={faPenToSquare} onClick={fillForm} title="Edit" />
+                                        <FontAwesomeIcon icon={faTrash} onClick={handleDelete} title="Delete" />
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </Tbody>
+                </Table>
+            </DoctorsTableStyled>
+        </>
     )
 }
 
