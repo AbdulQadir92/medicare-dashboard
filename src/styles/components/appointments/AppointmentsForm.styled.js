@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const AppointmentsFormStyled = styled.div`
     margin-bottom: 50px;
+    font-size: 15px;
 
     form > h2 {
         text-align: center;

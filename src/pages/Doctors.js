@@ -1,21 +1,41 @@
 import { useState } from "react";
 import { DoctorsFormStyled } from "../styles/components/doctors/DoctorsForm.styled";
-import DoctorsTable from "../components/doctors/DoctorsTable";
-import Button from '../components/Button';
-import SecondaryBtn from "../components/SecondaryBtn";
+import { CancelButton, DeleteButton, Button } from "../styles/components/FormButttons.styled";
+import ReactTable from "../components/reactTable/ReactTable";
+import DeleteModal from "../components/DeleteModal";
 
-import doctor1 from '../images/doctors/doctor1.jpg';
-import doctor2 from '../images/doctors/doctor2.jpg';
-import doctor4 from '../images/doctors/doctor4.jpg';
+import doctor1 from '../images/doctors/doctor1-min.jpg';
+import doctor2 from '../images/doctors/doctor2-min.jpg';
+import doctor3 from '../images/doctors/doctor3-min.jpg';
+import doctor4 from '../images/doctors/doctor4-min.jpg';
+import doctor5 from '../images/doctors/doctor5-min.jpg';
+import doctor6 from '../images/doctors/doctor6-min.jpg';
 
 
 const Doctors = () => {
     const desc = 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit'
 
     const data = [
-        { doctorName: 'Jone Smith', doctorImg: doctor1, designation: 'Cardiologist', description: desc },
-        { doctorName: 'Michael Hart', doctorImg: doctor2, designation: 'Eye Specialist', description: desc },
-        { doctorName: 'Harry Kane', doctorImg: doctor4, designation: 'Dental Surgeon', description: desc },
+        { id: 1, doctorName: 'Jone Smith', doctorImg: doctor1, designation: 'Cardiologist', description: desc },
+        { id: 2, doctorName: 'Michael Hart', doctorImg: doctor2, designation: 'Eye Specialist', description: desc },
+        { id: 3, doctorName: 'Mason Mount', doctorImg: doctor3, designation: 'Virologist', description: desc },
+        { id: 4, doctorName: 'Harry Kane', doctorImg: doctor4, designation: 'Dental Surgeon', description: desc },
+        { id: 5, doctorName: 'Thomas Aglio', doctorImg: doctor5, designation: 'Hepatologist', description: desc },
+        { id: 6, doctorName: 'Terry Dubrow', doctorImg: doctor6, designation: 'Urologist', description: desc }
+    ]
+
+    const _columns = [
+        { Header: 'Id', accessor: 'id' },
+        { Header: 'Name', accessor: 'doctorName' },
+        {
+            Header: 'Image', Cell: tableProps => (
+                <div>
+                    <img src={tableProps.row.original.doctorImg} alt="..." width="50" height="50" />
+                </div>
+            )
+        },
+        { Header: 'Designation', accessor: 'designation' },
+        { Header: 'Description', accessor: 'description' }
     ]
 
     const [formData, setFormData] = useState({});
@@ -34,19 +54,16 @@ const Doctors = () => {
         setFormData({});
     }
 
-    const fillForm = (e) => {
-        const tdName = e.currentTarget.parentElement.parentElement.parentElement.querySelector('td:nth-child(2)').innerText;
-        const data = doctors.filter(doctor => doctor.doctorName === tdName);
-
-        const doctorName = data[0].doctorName;
-        const doctorImg = '';
-        const designation = data[0].designation;
-        const description = data[0].description;
-
-        const tableData = { doctorName, doctorImg, designation, description };
-        setFormData(tableData);
+    const fillForm = (tr) => {
+        const _tds = tr.querySelectorAll('td');
+        const id = _tds[1].innerText;
+        const doctorName = _tds[2].innerText;
+        const doctorImg = _tds[3].innerText;
+        const designation = _tds[4].innerText;
+        const description = _tds[5].innerText;
+        const rowData = { id, doctorName, doctorImg, designation, description };
+        setFormData(rowData);
         setSaveBtn(false);
-
         document.getElementById('doctorForm').scrollIntoView();
     }
 
@@ -55,14 +72,15 @@ const Doctors = () => {
         setSaveBtn(true);
     }
 
-    const handleDelete = (e) => {
-        const tdName = e.currentTarget.parentElement.parentElement.parentElement.querySelector('td:nth-child(2)').innerText;
-        setDoctors(doctors.filter(doctor => doctor.doctorName !== tdName));
+    const handleDelete = () => {
+        const id = document.querySelector('#id').value;
+        setDoctors(doctors.filter(doctor => doctor.id != id));
+        resetForm();
     }
 
     const handleUpdate = () => {
-        const nameValue = document.querySelector('#doctorName').value;
-        setDoctors(doctors.filter(doctor => doctor.doctorName !== nameValue));
+        const id = document.querySelector('#id').value;
+        setDoctors(doctors.filter(doctor => doctor.id != id));
         setDoctors(prevValue => [...prevValue, formData]);
         resetForm();
     }
@@ -72,9 +90,10 @@ const Doctors = () => {
             <DoctorsFormStyled>
                 <form onSubmit={handleSubmit}>
                     <h2 id="doctorForm">Doctor Details</h2>
+                    <input type="number" id="id" value={formData.id || ''} onChange={(e) => handleChange(e, setFormData)} style={{ display: 'none' }} />
                     <section>
                         <div>
-                            <label htmlFor="doctorName">Name <span>(Required)</span></label>
+                            <label htmlFor="id">Name <span>(Required)</span></label>
                             <input type="text" id="doctorName" value={formData.doctorName || ''} onChange={handleChange} required />
                         </div>
                         <div>
@@ -94,17 +113,19 @@ const Doctors = () => {
                     </section>
                     <div>
                         {saveBtn ? (
-                            <Button value="Save" type="submit" />
+                            <Button type="submit">Save</Button>
                         ) : (
                             <>
-                                <SecondaryBtn value="Cancel" marginRight="15px" onClick={resetForm} />
-                                <Button value="Edit" onClick={handleUpdate} />
+                                <CancelButton onClick={resetForm}>Cancel</CancelButton>
+                                <DeleteButton onClick={(e) => e.preventDefault()} data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</DeleteButton>
+                                <Button onClick={handleUpdate}>Edit</Button>
                             </>
                         )}
                     </div>
                 </form>
             </DoctorsFormStyled>
-            <DoctorsTable doctors={doctors} fillForm={fillForm} handleDelete={handleDelete} />
+            <DeleteModal handleDelete={handleDelete} />
+            <ReactTable heading="Doctor" _columns={_columns} _data={doctors} fillForm={fillForm} pg="doctors" />
         </div>
     )
 }

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const ServicesFormStyled = styled.div`
     margin-bottom: 50px;
+    font-size: 15px;
 
     form > h2 {
         text-align: center;
@@ -55,5 +56,12 @@ export const ServicesFormStyled = styled.div`
         form > section:nth-child(2) {
             grid-template-columns: 1fr;
         }
+    }
+`
+
+export const Description = styled.div`
+    
+    p:last-child {
+        margin: 0;
     }
 `

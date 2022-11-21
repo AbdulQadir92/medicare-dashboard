@@ -45,7 +45,7 @@ const GlobalStyles = createGlobalStyle`
         font-size: 14px;
     }
 
-    input:focus, textarea:focus {
+    input:focus, textarea:focus, select:focus {
         border: 1px solid transparent;
         outline: 1px solid ${({ theme }) => theme.colors.mainColor};
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(100, 149, 237, 0.6);

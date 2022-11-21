@@ -3,27 +3,25 @@ import styled from "styled-components";
 
 export const DeleteModalStyled = styled.div`
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 100001;
+    transform: translate(-50%, -60%);
 
-    /* &::after {
-        content: '';
-        position: fixed;
-        z-index: 10000;
-
-        width: 100vh;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.5);
-    } */
-
-    button {
-        padding: 0 5px;
-        font-size: 14px;
-    }
+    width: 350px;
 `
 
-export const DarkBg = styled.div`
-  
+export const ModalBody = styled.div`
+    text-align: center;
+    font-weight: bold;
+    font-size: 17px;
+`
+
+export const ModalFooter = styled.div`
+    display: flex;
+    justify-content: center;
+
+    button {
+        padding: 5px 20px;
+        font-size: 17px;
+    }
 `
