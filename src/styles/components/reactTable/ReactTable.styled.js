@@ -18,7 +18,7 @@ export const ReactTableStyled = styled.div`
     & > span {
         position: absolute;
         right: 2px;
-        top: -20px;
+        top: 0;
 
         width: 250px;
     }
@@ -26,6 +26,18 @@ export const ReactTableStyled = styled.div`
     @media (max-width: 1199px) {
         & > h2 {
             text-align: left;
+        }
+    }
+
+    @media (max-width: 767px) {
+        & > h2 {
+            margin-bottom: 30px;
+        }
+
+        & > span {
+            position: relative;
+            left: 0;       
+            top: -15px;
         }
     }
 
@@ -40,10 +52,10 @@ export const Table = styled.table`
     position: relative;
 
     width: 100%;
+    min-width: 800px;
     border: 1px solid rgba(150, 150, 150, 0.4);
     background: ${({ theme }) => theme.colors.secBg};
     padding: 5px;
-    min-width: 800px;
 `
 
 export const Thead = styled.thead`

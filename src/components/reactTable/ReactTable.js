@@ -86,7 +86,6 @@ const ReactTable = ({ heading, _columns, _data, fillForm = () => { }, _checkbox 
         <ReactTableStyled>
             <h2>{heading}</h2>
             <span>
-                Search: {' '}
                 <input type="search" placeholder="Search" value={value || ''} onChange={(e) => {
                     setValue(e.target.value)
                     onChange(e.target.value)
