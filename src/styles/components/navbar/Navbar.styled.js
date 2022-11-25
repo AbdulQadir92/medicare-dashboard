@@ -32,6 +32,10 @@ export const NavbarStyled = styled.nav`
 
 export const Icon = styled.div`
     & > div {
+        position: fixed;
+        top: 12.5px;
+        z-index: 100000;
+
         width: 30px;
         cursor: pointer;
         padding: 2px 0;
@@ -42,6 +46,7 @@ export const Icon = styled.div`
         height: 3px;
         border-radius: 6px;
         background: ${({ theme }) => theme.colors.darkText};
+        opacity: 0.5;
     }
 
     & > div > div:not(:last-child) {

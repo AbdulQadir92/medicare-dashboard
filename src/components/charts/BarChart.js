@@ -6,7 +6,7 @@ const BarChart = ({ chartData }) => {
     return (
         <Bar data={chartData} options={{
             responsive: true,
-            maintainAspectRatio: true,
+            maintainAspectRatio: false
         }} />
     )
 }

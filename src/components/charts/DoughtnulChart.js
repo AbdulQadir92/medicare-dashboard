@@ -6,8 +6,7 @@ const DoughnutChart = ({ chartData }) => {
     return (
         <Doughnut data={chartData} options={{
             responsive: true,
-            maintainAspectRatio: true,
-            width: "100",
+            maintainAspectRatio: false,
             plugins: {
                 tooltip: {
                     enabled: true,

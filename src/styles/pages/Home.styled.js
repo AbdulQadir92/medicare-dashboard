@@ -30,7 +30,7 @@ export const Charts = styled.div`
     display: grid;
     justify-content: space-evenly;
     align-items: center;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 2fr 1fr;
     grid-gap: 20px;
 
     margin-top: 20px;
@@ -46,7 +46,6 @@ export const Charts = styled.div`
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 6px;
         padding: 20px;
-        height: 300px;
     }
 
     @media (max-width: 1199px) {
@@ -61,50 +60,28 @@ export const Charts = styled.div`
 `
 
 export const BarChartStyled = styled.div`
+    height: 180px;
 
     div {
-        width: 100%;
-    }
-
-    @media (max-width: 1199px) {
-        height: 190px !important;
-
-        div {
-            width: 50%;
-        }
-    }
-
-    @media (max-width: 991px) {
-        height: 280px !important;
-
-        div {
-            width: 80%;
-        }
-    }
-
-    @media (max-width: 767px) {
-        height: 300px !important;
-
-        div {
-            width: 100%;
-        }
+        width: 95%;
     }
 
     @media (max-width: 575px) {
-        height: 220px !important;
+        div {
+            width: 95%;
+        }
     }
 `
 
 export const DoughnutChartStyled = styled.div`
-   
+    padding-top: 10px !important;
+    height: 180px;
+
     & > div {
         display: flex;
     }
 
     @media (max-width: 1199px) {
-        height: 180px !important;
-        padding-top: 10px !important;
-
         & > div {
             width: 50%;
         }
@@ -121,15 +98,15 @@ export const DoughnutChartStyled = styled.div`
             width: 100%;
         }
     }
+
+    @media (max-width: 575px) {
+        padding-top: 0 !important;
+    }
 `
 
 export const DoughnutContainer = styled.div`
-    width: 160px;
-    margin-right: 10%;
-
-    @media (max-width: 575px) {
-        margin-right: 5%;
-    }
+    width: 50%;
+    margin-right: 10px;
 `
 
 export const Labels = styled.div`
@@ -138,7 +115,7 @@ export const Labels = styled.div`
     justify-content: center;
     align-items: flex-start;
 
-    width: calc(90% - 160px);
+    width: 50%;
 `
 
 export const LabelsFlex = styled.div`
