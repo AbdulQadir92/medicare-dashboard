@@ -9,7 +9,7 @@ export const SidebarStyled = styled.div`
     }
 
     position: fixed;
-    z-index: 100001;
+    z-index: 2;
     
     width: 220px;
 

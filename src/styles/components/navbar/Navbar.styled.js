@@ -34,7 +34,7 @@ export const Icon = styled.div`
     & > div {
         position: fixed;
         top: 12.5px;
-        z-index: 100000;
+        z-index: 1;
 
         width: 30px;
         cursor: pointer;
@@ -55,6 +55,8 @@ export const Icon = styled.div`
 `
 
 export const Search = styled.div`
+    visibility: hidden;
+
     input {
         width: 100%;
         padding: 4px 15px;

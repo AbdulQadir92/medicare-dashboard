@@ -2,12 +2,11 @@ import styled from "styled-components";
 
 
 export const MainStyled = styled.div`
-    position: absolute;
+    position: relative;
     left: 220px;
 
     width: calc(100% - 220px);
-
-    min-height: 100vh;
+    /* min-height: 100vh; */
     background: ${({ theme }) => theme.colors.mainBg};
     transition: 0.3s;
 
@@ -38,5 +37,8 @@ export const MainStyled = styled.div`
 `
 
 export const PagesContainer = styled.div`
+    position: relative;
+
+    min-height: calc(100vh - 120px);
     padding: 20px;
 `

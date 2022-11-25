@@ -9,6 +9,7 @@ import Emails from './Emails';
 
 import Navbar from '../components/navbar/Navbar';
 import SidebarTooltip from '../components/sidebar/SidebarTooltip';
+import Footer from '../components/Footer';
 
 
 const Main = () => {
@@ -33,6 +34,8 @@ const Main = () => {
                     <Route path='/emails' element={<Emails />} />
                 </Routes>
             </PagesContainer>
+
+            <Footer />
         </MainStyled>
     )
 }

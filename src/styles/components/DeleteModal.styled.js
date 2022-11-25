@@ -6,8 +6,6 @@ export const DeleteModalStyled = styled.div`
     top: 40%;
     left: 50%;
     transform: translate(-50%, -60%);
-
-    width: 350px;
 `
 
 export const ModalBody = styled.div`

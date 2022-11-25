@@ -5,6 +5,7 @@ export const ProfileStyled = styled.div`
     position: absolute;
     top: 43px;
     right: 0;
+    z-index: 1000;
 
     width: 250px;
     background: ${({ theme }) => theme.colors.secBg};

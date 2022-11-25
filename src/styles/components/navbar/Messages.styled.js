@@ -5,6 +5,7 @@ export const MessagesStyled = styled.div`
     position: absolute;
     top: 35px;
     right: 0;
+    z-index: 1000;
 
     width: 250px;
     background: ${({ theme }) => theme.colors.secBg};
