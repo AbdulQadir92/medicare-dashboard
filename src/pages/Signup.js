@@ -1,13 +1,15 @@
-import { useState } from "react";
-import { SignupStyled, SignupBrand, SignupInfo, SignupButton, SocialLine, SocialSignup, SocialIcon, SignupLink } from "../styles/pages/Signup.styled";
+import { useState, useContext } from "react";
+import { SignupStyled, SignupBrand, Message, SignupInfo, SignupButton, SocialLine, SocialSignup, SocialIcon, SignupLink } from "../styles/pages/Signup.styled";
 import { Button } from "../styles/components/FormButttons.styled";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartPulse } from '@fortawesome/free-solid-svg-icons';
 import { faFacebookF, faGooglePlusG } from '@fortawesome/free-brands-svg-icons';
+import AuthContext from "../contexts/AuthContext";
 
 
 const Signup = () => {
+    const { signup } = useContext(AuthContext);
     const [formData, setFormData] = useState({});
 
     const handleChange = (e) => {
@@ -16,10 +18,21 @@ const Signup = () => {
         setFormData(prevValue => ({ ...prevValue, [name]: value }))
     }
 
+    const handleType = (e) => {
+        const target = e.target;
+        if (!isNaN(target.value) && target.value !== '' || target.value === '+') {
+            const temp = target.value;
+            target.value = '';
+            target.type = 'tel';
+            target.value = temp;
+        } else if (target.value === '') {
+            target.type = 'email';
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
-        setFormData({});
+        signup(formData, setFormData);
     }
 
     return (
@@ -32,15 +45,15 @@ const Signup = () => {
                         </span>
                         <span>MediCare</span>
                     </SignupBrand>
-                    <p>Create your account in a few steps</p>
+                    <p>Sign Up in a few steps</p>
                     <section>
                         <div>
-                            <label htmlFor="username">Username</label>
-                            <input type="text" id="username" value={formData.username || ''} onChange={handleChange} required />
-                        </div>
-                        <div>
-                            <label htmlFor="email">Email</label>
-                            <input type="email" id="email" value={formData.email || ''} onChange={handleChange} required />
+                            <label htmlFor="username">Phone / Email</label>
+                            <input type="email" id="username" value={formData.username || ''} onChange={(e) => {
+                                handleChange(e);
+                                handleType(e);
+                            }} required />
+                            <Message id="usernameMsg">Account with this Phone Number or Email already exists</Message>
                         </div>
                         <div>
                             <label htmlFor="password1">Password</label>
@@ -49,12 +62,13 @@ const Signup = () => {
                         <div>
                             <label htmlFor="password2">Confirm Password</label>
                             <input type="password" id="password2" value={formData.password2 || ''} onChange={handleChange} required />
+                            <Message id="passwords">Passwords do not match</Message>
                         </div>
                     </section>
                     <SignupInfo>
                         <div>
                             <div>
-                                <input type="checkbox" id="loggedIn" />
+                                <input type="checkbox" id="loggedIn" required />
                             </div>
                             <label htmlFor="loggedIn">I agree to <Link to="#">Privacy Policy & Terms</Link></label>
                         </div>

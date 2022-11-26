@@ -7,25 +7,28 @@ import Sidebar from './components/sidebar/Sidebar';
 import PrivateRoute from './utils/PrivateRoute';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import { AuthProvider } from './contexts/AuthContext';
 
 
 function App() {
   return (
     <ThemeProvider theme={LightTheme}>
       <Router>
-        <GlobalStyles />
-        <div>
-          <Routes>
-            <Route path="*" element={
-              <PrivateRoute>
-                <Sidebar />
-                <Main />
-              </PrivateRoute>
-            }></Route>
-            <Route path="/signup" element={<Signup />}></Route>
-            <Route path="/login" element={<Login />} ></Route>
-          </Routes>
-        </div>
+        <AuthProvider>
+          <GlobalStyles />
+          <div>
+            <Routes>
+              <Route path="*" element={
+                <PrivateRoute>
+                  <Sidebar />
+                  <Main />
+                </PrivateRoute>
+              }></Route>
+              <Route path="/signup" element={<Signup />}></Route>
+              <Route path="/login" element={<Login />} ></Route>
+            </Routes>
+          </div>
+        </AuthProvider>
       </Router>
     </ThemeProvider>
   );

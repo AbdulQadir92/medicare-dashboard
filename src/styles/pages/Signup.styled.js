@@ -21,7 +21,7 @@ export const SignupStyled = styled.div`
 
     form > p {
         text-align: center;
-        color: ${({ theme }) => theme.colors.darkTextSec};
+        color: ${({ theme }) => theme.colors.darkText};
         margin-bottom: 10px;
     }
 
@@ -59,6 +59,13 @@ export const SignupBrand = styled.div`
         font-weight: bold;
         margin-left: 7px;
     }
+`
+
+export const Message = styled.span`
+    font-size: 13px;
+    color: #DE3163;
+    margin-top: 5px;
+    display: none;
 `
 
 export const SignupInfo = styled.div`

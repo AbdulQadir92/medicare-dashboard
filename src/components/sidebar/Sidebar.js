@@ -141,24 +141,6 @@ const Sidebar = () => {
                         <span>Emails</span>
                     </Link>
                 </Li>
-
-                <Li>
-                    <Link to="/signup">
-                        <span>
-                            <FontAwesomeIcon icon={faEnvelope} />
-                        </span>
-                        <span>Signup</span>
-                    </Link>
-                </Li>
-
-                <Li>
-                    <Link to="/login">
-                        <span>
-                            <FontAwesomeIcon icon={faEnvelope} />
-                        </span>
-                        <span>Login</span>
-                    </Link>
-                </Li>
             </SidebarUL>
         </SidebarStyled >
     )
