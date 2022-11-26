@@ -50,6 +50,12 @@ const GlobalStyles = createGlobalStyle`
         outline: 1px solid ${({ theme }) => theme.colors.mainColor};
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(100, 149, 237, 0.6);
     }
+
+    input[type='checkbox']:focus {
+        border: initial;
+        outline: initial;
+        box-shadow: none;
+    }
 `
 
 export default GlobalStyles

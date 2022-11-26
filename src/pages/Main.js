@@ -24,7 +24,6 @@ const Main = () => {
             <SidebarTooltip name="Appointments" top="210px" id="appointmentsTooltip" />
             <SidebarTooltip name="Emails" top="255px" id="emailsTooltip" />
 
-
             <PagesContainer>
                 <Routes>
                     <Route path="/" element={<Home />} />
