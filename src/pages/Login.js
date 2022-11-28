@@ -9,7 +9,7 @@ import AuthContext from "../contexts/AuthContext";
 
 
 const Login = () => {
-    const { login, setKeepLoggedIn } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
     const [formData, setFormData] = useState({});
 
     const handleChange = (e) => {
@@ -20,7 +20,7 @@ const Login = () => {
 
     const handleType = (e) => {
         const target = e.target;
-        if (!isNaN(target.value) && target.value !== '' || target.value === '+') {
+        if (!isNaN(target.value) && (target.value !== '' || target.value === '+')) {
             const temp = target.value;
             target.value = '';
             target.type = 'tel';
@@ -63,7 +63,7 @@ const Login = () => {
                     <LoginInfo>
                         <div>
                             <div>
-                                <input type="checkbox" id="loggedIn" onChange={() => setKeepLoggedIn(true)} />
+                                <input type="checkbox" id="loggedIn" onChange={() => localStorage.setItem('keepLoggedIn', true)} />
                             </div>
                             <label htmlFor="loggedIn">Keep me logged in</label>
                         </div>

@@ -20,7 +20,7 @@ const Signup = () => {
 
     const handleType = (e) => {
         const target = e.target;
-        if (!isNaN(target.value) && target.value !== '' || target.value === '+') {
+        if (!isNaN(target.value) && (target.value !== '' || target.value === '+')) {
             const temp = target.value;
             target.value = '';
             target.type = 'tel';

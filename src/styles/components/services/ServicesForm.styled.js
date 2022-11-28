@@ -65,3 +65,10 @@ export const Description = styled.div`
         margin: 0;
     }
 `
+
+export const NoData = styled.div`
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #DE3163;
+`

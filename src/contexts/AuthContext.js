@@ -8,9 +8,10 @@ export default AuthContext;
 
 
 export const AuthProvider = ({ children }) => {
-    const [authTokens, setAuthTokens] = useState(null);
+    const [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null);
     const [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null);
-    const [keepLoggedIn, setKeepLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [keepLoggedIn, setKeepLoggedIn] = useState(() => localStorage.getItem('keepLoggedIn') ? localStorage.getItem('keepLoggedIn') : false);
     const navigate = useNavigate();
 
     const signup = (formData, setFormData) => {
@@ -76,18 +77,17 @@ export const AuthProvider = ({ children }) => {
                 return res.json();
             })
             .then(data => {
-                if (data.access) {
-                    setAuthTokens(data);
-                    if (keepLoggedIn) {
-                        localStorage.setItem('authTokens', JSON.stringify(data));
-                    }
-                    setUser(jwt_decode(data.access));
-                    setFormData({});
-                    navigate('/');
+                setAuthTokens(data);
+                if (keepLoggedIn) {
+                    localStorage.setItem('authTokens', JSON.stringify(data));
                 }
+                setUser(jwt_decode(data.access));
+                setFormData({});
+                navigate('/');
             })
             .catch(error => {
                 loginMessage(error.message);
+                logout();
             })
     }
 
@@ -105,24 +105,66 @@ export const AuthProvider = ({ children }) => {
         setAuthTokens(null);
         localStorage.removeItem('authTokens');
         setUser(null);
+        localStorage.removeItem('keepLoggedIn')
         navigate('/login');
     }
 
-    useEffect(() => {
+    const updateToken = () => {
+        console.log('token updated')
+        fetch('http://127.0.0.1:8000/accounts/api/token/refresh/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ refresh: authTokens?.refresh })
+        })
+            .then(res => {
+                if (!res.ok) {
+                    throw Error('Refresh token not updated');
+                }
+                return res.json();
+            })
+            .then(data => {
+                setAuthTokens(data);
+                if (keepLoggedIn) {
+                    localStorage.setItem('authTokens', JSON.stringify(data));
+                }
+                setUser(jwt_decode(data.access));
+            })
+            .catch(error => {
+                console.log(error);
+                logout();
+            })
+        if (loading) {
+            setLoading(false);
+        }
+    }
 
-    }, [])
+    useEffect(() => {
+        if (loading) {
+            updateToken();
+        }
+
+        const fourMinutes = 1000 * 60 * 4;
+        const interval = setInterval(() => {
+            if (authTokens) {
+                updateToken();
+            }
+        }, fourMinutes)
+        return () => clearInterval(interval)
+    }, [loading, authTokens])
 
     const contextData = {
         user,
+        authTokens,
         signup,
         login,
-        logout,
-        setKeepLoggedIn
+        logout
     }
 
     return (
         <AuthContext.Provider value={contextData}>
-            {children}
+            {loading ? null : children}
         </AuthContext.Provider>
     )
 } 

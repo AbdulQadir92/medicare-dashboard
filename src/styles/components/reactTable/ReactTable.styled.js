@@ -18,7 +18,7 @@ export const ReactTableStyled = styled.div`
     & > span {
         position: absolute;
         right: 2px;
-        top: 0;
+        top: 3px;
 
         width: 250px;
     }

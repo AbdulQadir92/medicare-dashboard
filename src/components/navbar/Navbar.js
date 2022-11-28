@@ -13,11 +13,11 @@ const Navbar = () => {
     useEffect(() => {
         document.addEventListener('click', (e) => {
             e.stopPropagation();
-            const inp = document.querySelector('#searchInput');
-            if (!e.target.closest('#searchInput') && inp.classList.contains('active')) {
-                inp.classList.remove('active');
-                inp.value = '';
-            }
+            // const inp = document.querySelector('#searchInput');
+            // if (!e.target.closest('#searchInput') && inp.classList.contains('active')) {
+            //     inp.classList.remove('active');
+            //     inp.value = '';
+            // }
 
             if (window.innerWidth < 576) {
                 const sidebar = document.querySelector('#sidebar');
