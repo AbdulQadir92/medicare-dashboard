@@ -32,7 +32,15 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        login(formData, setFormData);
+        const data = {};
+        if (formData?.username.startsWith('+')) {
+            const username = '0' + formData?.username.substring(3);
+            data.username = username;
+            data.password = formData.password;
+            login(data, setFormData);
+        } else {
+            login(formData, setFormData);
+        }
     }
 
     return (

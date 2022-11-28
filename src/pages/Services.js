@@ -35,7 +35,6 @@ const Services = () => {
 
     useEffect(() => {
         FetchRequest('http://127.0.0.1:8000/services/', authTokens, formatData, null, logout)
-        FetchRequest('http://127.0.0.1:8000/services/' + 2, authTokens)
     }, [service])
 
     const formatData = (data) => {

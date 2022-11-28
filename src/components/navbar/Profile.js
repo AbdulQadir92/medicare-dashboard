@@ -7,12 +7,12 @@ import AuthContext from '../../contexts/AuthContext';
 
 
 const Profile = ({ profile }) => {
-    const { logout } = useContext(AuthContext);
+    const { logout, user } = useContext(AuthContext);
 
     return (
         <ProfileStyled id="profile" ref={profile}>
             <Top>
-                <h3>John Doe</h3>
+                <h3>{user.username}</h3>
                 <div>Admin</div>
             </Top>
             <Middle>

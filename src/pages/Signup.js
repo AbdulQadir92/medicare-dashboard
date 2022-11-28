@@ -32,7 +32,16 @@ const Signup = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        signup(formData, setFormData);
+        const data = {};
+        if (formData?.username.startsWith('+')) {
+            const username = '0' + formData?.username.substring(3);
+            data.username = username;
+            data.password1 = formData.password1;
+            data.password2 = formData.password2;
+            signup(data, setFormData);
+        } else {
+            signup(formData, setFormData);
+        }
     }
 
     return (
