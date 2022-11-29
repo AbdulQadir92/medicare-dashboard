@@ -58,3 +58,10 @@ export const AppointmentsFormStyled = styled.div`
         }
     }
 `
+
+export const NoData = styled.div`
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #DE3163;
+`
