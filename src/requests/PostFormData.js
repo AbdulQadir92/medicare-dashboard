@@ -15,7 +15,7 @@ const PostFormData = (url, authTokens, formData, setState = null) => {
             return res.json();
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             if (setState) { setState(data) }
         })
         .catch(error => {

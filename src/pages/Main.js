@@ -12,10 +12,10 @@ import SidebarTooltip from '../components/sidebar/SidebarTooltip';
 import Footer from '../components/Footer';
 
 
-const Main = ({ setTheme }) => {
+const Main = ({ setTheme, setMainColor }) => {
     return (
         <MainStyled id="main">
-            <Navbar setTheme={setTheme} />
+            <Navbar setTheme={setTheme} setMainColor={setMainColor} />
 
             {/* Sidebar Tooltips */}
             <SidebarTooltip name="Dashboard" top="75px" id="dashboardTooltip" />

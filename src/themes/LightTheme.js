@@ -3,6 +3,7 @@
 export const LightTheme = {
     colors: {
         mainColor: '#6495ED',
+
         mainBg: '#f5fdfd',
         secBg: '#fff',
 
