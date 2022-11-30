@@ -9,6 +9,7 @@ export const AppointmentsFormStyled = styled.div`
         text-align: center;
         margin-bottom: 20px;
         font-size: 25px;
+        color: ${({ theme }) => theme.colors.darkText};
     }
 
     form {
@@ -17,7 +18,7 @@ export const AppointmentsFormStyled = styled.div`
         border: 1px solid rgba(150, 150, 150, 0.4);
         padding: 30px;
         border-radius: 6px;
-        background: ${({ theme }) => theme.colors.mainBg};
+        background: ${({ theme }) => theme.colors.secBg};
     }
 
     form > section {

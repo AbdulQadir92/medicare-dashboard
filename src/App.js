@@ -1,5 +1,6 @@
 import { ThemeProvider } from 'styled-components';
 import { LightTheme } from './themes/LightTheme';
+import { DarkTheme } from './themes/DarkTheme';
 import GlobalStyles from './styles/Global';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Main from './pages/Main';
@@ -8,11 +9,14 @@ import PrivateRoute from './utils/PrivateRoute';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import { AuthProvider } from './contexts/AuthContext';
+import { useState } from 'react';
 
 
 function App() {
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light');
+
   return (
-    <ThemeProvider theme={LightTheme}>
+    <ThemeProvider theme={theme === 'light' ? LightTheme : DarkTheme}>
       <Router>
         <AuthProvider>
           <GlobalStyles />
@@ -21,7 +25,7 @@ function App() {
               <Route path="*" element={
                 <PrivateRoute>
                   <Sidebar />
-                  <Main />
+                  <Main setTheme={setTheme} />
                 </PrivateRoute>
               }></Route>
               <Route path="/signup" element={<Signup />}></Route>

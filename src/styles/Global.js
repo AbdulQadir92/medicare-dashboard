@@ -15,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
 
 
     label {
+        color: ${({ theme }) => theme.colors.darkText};
         margin-bottom: 5px;
     }
 
@@ -25,8 +26,10 @@ const GlobalStyles = createGlobalStyle`
 
     input, textarea, select {
         display: block;
+        background: ${({ theme }) => theme.colors.secBg};
+        color: ${({ theme }) => theme.colors.darkText};
         width: 100%;
-        border: 1px solid rgba(150, 150, 150, 0.5);
+        border: 1px solid ${({ theme }) => theme.colors.borderColor};
         border-radius: 6px;
         padding: 4px 10px;
     }
@@ -39,9 +42,11 @@ const GlobalStyles = createGlobalStyle`
 
     ::-webkit-file-upload-button {
         height: 100%;
+        background: ${({ theme }) => theme.colors.secBg};
+        color: ${({ theme }) => theme.colors.darkText};
         padding: 0 10px;
         border: none;
-        border-right: 1px solid rgba(150, 150, 150, 0.5);
+        border-right: 1px solid ${({ theme }) => theme.colors.borderColor};
         font-size: 14px;
     }
 

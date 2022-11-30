@@ -7,6 +7,7 @@ export const LoginStyled = styled.div`
     align-items: center;
     padding: 20px;
 
+    background: ${({ theme }) => theme.colors.mainBg};
     font-size: 15px;
     min-height: 100vh;
 
@@ -31,7 +32,6 @@ export const LoginStyled = styled.div`
         padding: 20px;
         border-radius: 6px;
         background: ${({ theme }) => theme.colors.secBg};
-        /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
     }
 
     form > section > div {

@@ -16,7 +16,7 @@ export const SidebarStyled = styled.div`
     min-height: 100vh;
     padding-left: 10px;
     background: ${({ theme }) => theme.colors.secBg};
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    box-shadow: ${({ theme }) => theme.colors.boxShadow};
     overflow: hidden;
     transition: 0.3s;
 
@@ -89,7 +89,7 @@ export const Li = styled.li`
     &:not(:first-child):hover, 
     &:not(:first-child).active {
         background: ${({ theme }) => theme.colors.mainColor};
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        box-shadow: ${({ theme }) => theme.colors.boxShadow};
     }
 
     a {

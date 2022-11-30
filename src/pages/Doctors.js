@@ -159,7 +159,7 @@ const Doctors = () => {
             </DoctorsFormStyled>
             <DeleteModal handleDelete={handleDelete} />
             {doctors && doctors.length === 0 && <NoData>No doctors to show</NoData>}
-            {doctors && doctors.length !== 0 && <ReactTable heading="Doctor" _columns={_columns} _data={doctors} fillForm={fillForm} pg="doctors" />}
+            {doctors && doctors.length !== 0 && <ReactTable heading="Doctors" _columns={_columns} _data={doctors} fillForm={fillForm} pg="doctors" />}
         </div>
     )
 }

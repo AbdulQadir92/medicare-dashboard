@@ -9,8 +9,8 @@ export const ProfileStyled = styled.div`
 
     width: 250px;
     background: ${({ theme }) => theme.colors.secBg};
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    border: 1px solid rgba(150, 150, 150, 0.2);
+    box-shadow: ${({ theme }) => theme.colors.boxShadow};
+    border: 1px solid ${({ theme }) => theme.nav.border};
     border-radius: 5px;
     cursor: default;
     display: none;
@@ -22,7 +22,7 @@ export const ProfileStyled = styled.div`
 
 export const Top = styled.div`
     padding: 10px;
-    border-bottom: 1px solid rgba(150, 150, 150, 0.2);
+    border-bottom: 1px solid ${({ theme }) => theme.nav.border};
 
     h3 {
         font-size: 18px;
@@ -64,7 +64,7 @@ export const Middle = styled.div`
 
 export const Bottom = styled(Middle)`
     padding: 10px;
-    border-top: 1px solid rgba(150, 150, 150, 0.2);
+    border-top: 1px solid ${({ theme }) => theme.nav.border};
 
     span {
         font-size: 15px;

@@ -9,7 +9,7 @@ import Settings from "./Settings";
 import Profile from "./Profile";
 
 
-const Navbar = () => {
+const Navbar = ({ setTheme }) => {
     useEffect(() => {
         document.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -159,7 +159,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <FontAwesomeIcon icon={faGear} onClick={showSettings} />
-                        <Settings settings={settings} />
+                        <Settings settings={settings} setTheme={setTheme} />
                     </li>
                     <li>
                         <img src={user} alt="..." width="30" height="30" onClick={showProfile} />

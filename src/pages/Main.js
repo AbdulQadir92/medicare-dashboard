@@ -12,10 +12,10 @@ import SidebarTooltip from '../components/sidebar/SidebarTooltip';
 import Footer from '../components/Footer';
 
 
-const Main = () => {
+const Main = ({ setTheme }) => {
     return (
         <MainStyled id="main">
-            <Navbar />
+            <Navbar setTheme={setTheme} />
 
             {/* Sidebar Tooltips */}
             <SidebarTooltip name="Dashboard" top="75px" id="dashboardTooltip" />

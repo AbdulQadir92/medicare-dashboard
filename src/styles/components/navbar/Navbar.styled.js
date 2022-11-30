@@ -14,7 +14,7 @@ export const NavbarStyled = styled.nav`
     height: 50px;
     background: ${({ theme }) => theme.colors.secBg};
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    box-shadow: ${({ theme }) => theme.colors.boxShadow};
 
 
     @media (max-width: 1199px) {

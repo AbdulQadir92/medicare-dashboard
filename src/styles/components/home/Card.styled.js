@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const CardStyled = styled.div`
     background: ${({ theme }) => theme.colors.secBg};
     /* border: 1px solid ${props => props.color}; */
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid ${({ theme }) => theme.home.border};
     border-radius: 6px;
     height: 180px;
     padding: 20px;

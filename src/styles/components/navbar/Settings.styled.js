@@ -9,21 +9,21 @@ export const SettingsStyled = styled.div`
 
     width: 250px;
     background: ${({ theme }) => theme.colors.secBg};
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    border: 1px solid rgba(150, 150, 150, 0.2);
+    box-shadow: ${({ theme }) => theme.colors.boxShadow};
+    border: 1px solid ${({ theme }) => theme.nav.border};
     border-radius: 5px;
     cursor: default;
+    color: ${({ theme }) => theme.colors.darkText};
     display: none;
 
     h3 {
         font-size: 18px;
         text-align: center;
         padding-top: 10px;
-        color: ${({ theme }) => theme.colors.darkText};
     }
 
     & > div {
-        border-top: 1px solid rgba(150, 150, 150, 0.2);
+        border-top: 1px solid ${({ theme }) => theme.nav.border};
         padding: 15px;
     }
 

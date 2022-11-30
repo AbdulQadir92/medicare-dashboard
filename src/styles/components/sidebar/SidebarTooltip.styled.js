@@ -10,7 +10,7 @@ export const TooltipStyled = styled.div`
     color: ${({ theme }) => theme.colors.darkText};
     background: ${({ theme }) => theme.colors.secBg};
     padding: 5px 10px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: ${({ theme }) => theme.sidebar.tooltipShadow};
     border-radius: 5px;
     overflow: visible;
     display: none;

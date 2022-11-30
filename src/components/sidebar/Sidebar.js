@@ -130,7 +130,7 @@ const Sidebar = () => {
                         <span>Appoinments</span>
                     </Link>
                 </Li>
-                <Li
+                {/* <Li
                     onMouseEnter={() => showTooltip('emailsTooltip')}
                     onMouseLeave={() => hideTooltip('emailsTooltip')}
                 >
@@ -140,7 +140,7 @@ const Sidebar = () => {
                         </span>
                         <span>Emails</span>
                     </Link>
-                </Li>
+                </Li> */}
             </SidebarUL>
         </SidebarStyled >
     )

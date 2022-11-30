@@ -5,7 +5,7 @@ export const CancelButton = styled.button`
     padding: 0 10px;
     border: 2px solid #b5b1b1;
     background: #b5b1b1;
-    color: ${({ theme }) => theme.colors.lightText};
+    color: ${({ theme }) => theme.colors.formBtnColor};
     border-radius: 6px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     font-size: 15px;

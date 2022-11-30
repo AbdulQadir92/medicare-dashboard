@@ -7,6 +7,7 @@ export const SignupStyled = styled.div`
     align-items: center;
     padding: 20px;
 
+    background: ${({ theme }) => theme.colors.mainBg};
     font-size: 15px;
     min-height: 100vh;
 

@@ -13,6 +13,7 @@ export const ReactTableStyled = styled.div`
         text-align: center;
         margin-bottom: 20px;
         font-size: 25px;
+        color: ${({ theme }) => theme.colors.darkText};
     }
 
     & > span {
@@ -22,6 +23,7 @@ export const ReactTableStyled = styled.div`
 
         width: 250px;
     }
+
 
     @media (max-width: 1199px) {
         & > h2 {
@@ -53,7 +55,7 @@ export const Table = styled.table`
 
     width: 100%;
     min-width: 800px;
-    border: 1px solid rgba(150, 150, 150, 0.4);
+    border: 1px solid ${({ theme }) => theme.colors.borderColor};
     background: ${({ theme }) => theme.colors.secBg};
     padding: 5px;
 `
@@ -61,7 +63,7 @@ export const Table = styled.table`
 export const Thead = styled.thead`
 
     tr {
-        border-bottom: 1px solid rgba(150, 150, 150, 0.4);
+        border-bottom: 1px solid ${({ theme }) => theme.colors.borderColor};
     }
 
     th {
@@ -91,8 +93,10 @@ export const Thead = styled.thead`
 `
 
 export const Tbody = styled.tbody`
+    color: ${({ theme }) => theme.colors.darkText};
+
     tr {
-        border-bottom: 1px solid rgba(150, 150, 150, 0.4);
+        border-bottom: 1px solid ${({ theme }) => theme.colors.borderColor};
     }
 
     tr:nth-child(odd) {
@@ -144,6 +148,8 @@ export const Pagination = styled.div`
 `
 
 export const Left = styled.div`
+    color: ${({ theme }) => theme.colors.darkText};
+
     div {
         display: flex;
         align-items: center;
@@ -165,6 +171,10 @@ export const Right = styled.div`
     display: flex;
     align-items: center;
 
+    span {
+        color: ${({ theme }) => theme.colors.darkText};
+    }
+
     button:not(:last-child), span {
         margin-right: 10px;
     }
@@ -182,8 +192,8 @@ export const ButtonMain = styled.button`
 
 
     :disabled {
-        background: #ebe6e6;
-        border: 2px solid #ebe6e6;
+        background: ${({ theme }) => theme.reactTable.btnSecBg};
+        border: 2px solid ${({ theme }) => theme.reactTable.btnSecBg};
         color: ${({ theme }) => theme.colors.darkTextSec};
     }
 `

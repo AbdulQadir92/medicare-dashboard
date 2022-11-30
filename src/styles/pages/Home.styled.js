@@ -43,7 +43,7 @@ export const Charts = styled.div`
         position: relative;
 
         background: ${({ theme }) => theme.colors.secBg};
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        border: 1px solid ${({ theme }) => theme.home.border};
         border-radius: 6px;
         padding: 20px;
     }
@@ -136,7 +136,8 @@ export const LabelsFlex = styled.div`
     }
 
     span:nth-child(2) {
-        color: rgba(0, 0, 0, 0.75);
+        color: #635e5e;
+        /* color: ${({ theme }) => theme.colors.darkText}; */
     }
 `
 
