@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useReducer } from "react";
 import { ServicesFormStyled, Description, NoData } from "../styles/components/services/ServicesForm.styled";
 import { CancelButton, DeleteButton, Button } from "../styles/components/FormButttons.styled";
 import ReactTable from "../components/reactTable/ReactTable";
@@ -15,7 +15,6 @@ import virology from '../images/services/virology-min.png';
 import hepatology from '../images/services/hepatology-min.png';
 import urology from '../images/services/urology-min.png';
 
-
 const Services = () => {
     // const desc = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus quis animi, consequatur fugit porro recusandae. Facilis quis assumenda obcaecati fugiat eaque, dicta repellat maxime laboriosam eos, distinctio et deserunt enim.';
     // const servicesData = [
@@ -26,6 +25,8 @@ const Services = () => {
     //     { id: 5, title: 'Hepatology', image: hepatology, description: { p1: desc, p2: desc, p3: desc } },
     //     { id: 6, title: 'Urology', image: urology, description: { p1: desc, p2: desc, p3: desc } }
     // ];
+
+
 
     const { authTokens, logout } = useContext(AuthContext);
     const [services, setServices] = useState(null);
@@ -107,6 +108,7 @@ const Services = () => {
 
         PostFormData('http://127.0.0.1:8000/services/add/', authTokens, data, setService);
         setFormData({});
+
     }
 
     const fillForm = (tr) => {
