@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
-import { LoginStyled, LoginBrand, Message, LoginInfo, LoginButton, SocialLine, SocialLogin, SocialIcon, SignupLink } from "../styles/pages/Login.styled";
+import { LoginStyled, LoginBrand, Password, Message, LoginInfo, LoginButton, SocialLine, SocialLogin, SocialIcon, SignupLink } from "../styles/pages/Login.styled";
 import { Button } from "../styles/components/FormButttons.styled";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeartPulse } from '@fortawesome/free-solid-svg-icons';
+import { faHeartPulse, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faFacebookF, faGooglePlusG } from '@fortawesome/free-brands-svg-icons';
 import AuthContext from "../contexts/AuthContext";
 
@@ -11,6 +11,7 @@ import AuthContext from "../contexts/AuthContext";
 const Login = () => {
     const { login } = useContext(AuthContext);
     const [formData, setFormData] = useState({});
+    const [type, setType] = useState('password');
 
     const handleChange = (e) => {
         const name = e.target.id;
@@ -62,11 +63,22 @@ const Login = () => {
                                 handleType(e);
                             }} required />
                         </div>
-                        <div>
+                        <Password>
                             <label htmlFor="password">Password</label>
-                            <input type="password" id="password" value={formData.password || ''} onChange={handleChange} required />
+                            {type === 'password' && (<>
+                                <input type="password" id="password" value={formData.password || ''} onChange={handleChange} required />
+                                <span onClick={() => setType('text')} title="Show Password">
+                                    <FontAwesomeIcon icon={faEye} />
+                                </span>
+                            </>)}
+                            {type === 'text' && (<>
+                                <input type="text" id="password" value={formData.password || ''} onChange={handleChange} required />
+                                <span onClick={() => setType('password')} title="Hide Password">
+                                    <FontAwesomeIcon icon={faEyeSlash} />
+                                </span>
+                            </>)}
                             <Message id="loginMsg">Phone/Email or Password is incorrect</Message>
-                        </div>
+                        </Password>
                     </section>
                     <LoginInfo>
                         <div>
@@ -82,7 +94,7 @@ const Login = () => {
                     <LoginButton>
                         <Button type="submit">Login</Button>
                     </LoginButton>
-                    <SocialLine>
+                    {/* <SocialLine>
                         <div></div>
                         <div>Or Login with</div>
                         <div></div>
@@ -100,7 +112,7 @@ const Login = () => {
                             </SocialIcon>
                             Google
                         </Button>
-                    </SocialLogin>
+                    </SocialLogin> */}
                     <SignupLink>
                         <span>Don't have an account?</span>
                         <Link to="/signup">Sign Up</Link>

@@ -130,17 +130,6 @@ const Sidebar = () => {
                         <span>Appoinments</span>
                     </Link>
                 </Li>
-                {/* <Li
-                    onMouseEnter={() => showTooltip('emailsTooltip')}
-                    onMouseLeave={() => hideTooltip('emailsTooltip')}
-                >
-                    <Link to="/emails">
-                        <span>
-                            <FontAwesomeIcon icon={faEnvelope} />
-                        </span>
-                        <span>Emails</span>
-                    </Link>
-                </Li> */}
             </SidebarUL>
         </SidebarStyled >
     )

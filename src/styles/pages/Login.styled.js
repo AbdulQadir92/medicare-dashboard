@@ -61,6 +61,19 @@ export const LoginBrand = styled.div`
     }
 `
 
+export const Password = styled.div`
+    position: relative;
+
+    span {
+        position: absolute;
+        top: 33px;
+        right: 15px;
+
+        cursor: pointer;
+        color: ${({ theme }) => theme.colors.darkTextSec};
+    }
+`
+
 export const Message = styled.span`
     font-size: 13px;
     color: #DE3163;

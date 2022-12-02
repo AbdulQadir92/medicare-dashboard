@@ -24,7 +24,7 @@ const Profile = ({ profile }) => {
             <Bottom>
                 <div onClick={logout}>
                     <FontAwesomeIcon icon={faRightFromBracket} />
-                    <span>Log Out</span>
+                    <span>Logout</span>
                 </div>
             </Bottom>
         </ProfileStyled>

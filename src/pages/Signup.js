@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
-import { SignupStyled, SignupBrand, Message, SignupInfo, SignupButton, SocialLine, SocialSignup, SocialIcon, SignupLink } from "../styles/pages/Signup.styled";
+import { SignupStyled, SignupBrand, Password, Message, SignupInfo, SignupButton, SocialLine, SocialSignup, SocialIcon, SignupLink } from "../styles/pages/Signup.styled";
 import { Button } from "../styles/components/FormButttons.styled";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeartPulse } from '@fortawesome/free-solid-svg-icons';
+import { faHeartPulse, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faFacebookF, faGooglePlusG } from '@fortawesome/free-brands-svg-icons';
 import AuthContext from "../contexts/AuthContext";
 
@@ -11,6 +11,7 @@ import AuthContext from "../contexts/AuthContext";
 const Signup = () => {
     const { signup } = useContext(AuthContext);
     const [formData, setFormData] = useState({});
+    const [type, setType] = useState('password');
 
     const handleChange = (e) => {
         const name = e.target.id;
@@ -64,15 +65,37 @@ const Signup = () => {
                             }} required />
                             <Message id="usernameMsg">Account with this Phone Number or Email already exists</Message>
                         </div>
-                        <div>
+                        <Password>
                             <label htmlFor="password1">Password</label>
-                            <input type="password" id="password1" value={formData.password1 || ''} onChange={handleChange} required />
-                        </div>
-                        <div>
+                            {type === 'password' && (<>
+                                <input type="password" id="password1" value={formData.password1 || ''} onChange={handleChange} required />
+                                <span onClick={() => setType('text')} title="Show Password">
+                                    <FontAwesomeIcon icon={faEye} />
+                                </span>
+                            </>)}
+                            {type === 'text' && (<>
+                                <input type="text" id="password1" value={formData.password1 || ''} onChange={handleChange} required />
+                                <span onClick={() => setType('password')} title="Hide Password">
+                                    <FontAwesomeIcon icon={faEyeSlash} />
+                                </span>
+                            </>)}
+                        </Password>
+                        <Password>
                             <label htmlFor="password2">Confirm Password</label>
-                            <input type="password" id="password2" value={formData.password2 || ''} onChange={handleChange} required />
+                            {type === 'password' && (<>
+                                <input type="password" id="password2" value={formData.password2 || ''} onChange={handleChange} required />
+                                <span onClick={() => setType('text')} title="Show Password">
+                                    <FontAwesomeIcon icon={faEye} />
+                                </span>
+                            </>)}
+                            {type === 'text' && (<>
+                                <input type="text" id="password2" value={formData.password2 || ''} onChange={handleChange} required />
+                                <span onClick={() => setType('password')} title="Hide Password">
+                                    <FontAwesomeIcon icon={faEyeSlash} />
+                                </span>
+                            </>)}
                             <Message id="passwords">Passwords do not match</Message>
-                        </div>
+                        </Password>
                     </section>
                     <SignupInfo>
                         <div>
@@ -85,7 +108,7 @@ const Signup = () => {
                     <SignupButton>
                         <Button type="submit">Sign Up</Button>
                     </SignupButton>
-                    <SocialLine>
+                    {/* <SocialLine>
                         <div></div>
                         <div>Or Sign Up with</div>
                         <div></div>
@@ -103,7 +126,7 @@ const Signup = () => {
                             </SocialIcon>
                             Google
                         </Button>
-                    </SocialSignup>
+                    </SocialSignup> */}
                     <SignupLink>
                         <span>Already have an account?</span>
                         <Link to="/login">Log in</Link>
