@@ -1,62 +1,69 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { AppointmentsFormStyled, NoData } from "../styles/components/appointments/AppointmentsForm.styled";
 import { CancelButton, DeleteButton, Button } from "../styles/components/FormButttons.styled";
 import { format } from 'date-fns';
 import ReactTable from "../components/reactTable/ReactTable";
 import DeleteModal from "../components/DeleteModal";
-import PostRequest from "../requests/PostRequest";
-import AuthContext from "../contexts/AuthContext";
-import FetchRequest from "../requests/FetchRequest";
+import { v4 as uuidv4 } from 'uuid';
 
 
 const Appointments = () => {
-    // const recentAppointments = [
-    //     { id: 1, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
-    //     { id: 2, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
-    //     { id: 3, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
-    //     { id: 4, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
-    //     { id: 5, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
-    //     { id: 6, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
-    //     { id: 7, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
-    //     { id: 8, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
-    //     { id: 9, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
-    //     { id: 10, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
-    //     { id: 11, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
-    //     { id: 12, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
-    //     { id: 13, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
-    //     { id: 14, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
-    //     { id: 15, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
-    //     { id: 16, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
-    //     { id: 17, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
-    //     { id: 18, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
-    //     { id: 19, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
-    //     { id: 20, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
-    //     { id: 21, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
-    //     { id: 22, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
-    //     { id: 23, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
-    //     { id: 24, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
-    //     { id: 25, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
-    //     { id: 26, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
-    //     { id: 27, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
-    //     { id: 28, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
-    //     { id: 29, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
-    //     { id: 30, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
-    //     { id: 31, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
-    //     { id: 32, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
-    //     { id: 33, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
-    //     { id: 34, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
-    //     { id: 35, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
-    //     { id: 36, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' }
-    // ]
+    const recentAppointments = [
+        { id: 1, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
+        { id: 2, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
+        { id: 3, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
+        { id: 4, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
+        { id: 5, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
+        { id: 6, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
+        { id: 7, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
+        { id: 8, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
+        { id: 9, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
+        { id: 10, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
+        { id: 11, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
+        { id: 12, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
+        { id: 13, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
+        { id: 14, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
+        { id: 15, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
+        { id: 16, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
+        { id: 17, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
+        { id: 18, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
+        { id: 19, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
+        { id: 20, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
+        { id: 21, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
+        { id: 22, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
+        { id: 23, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
+        { id: 24, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
+        { id: 25, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
+        { id: 26, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
+        { id: 27, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
+        { id: 28, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
+        { id: 29, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
+        { id: 30, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
+        { id: 31, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
+        { id: 32, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
+        { id: 33, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' },
+        { id: 34, name: 'Aida Bugg', email: 'ab@gmail.com', service: 'Cardiology', doctor: 'John Smith', date: '2022-11-15', time: '18:33' },
+        { id: 35, name: 'Anne Thurium', email: 'at@gmail.com', service: 'Eye Care', doctor: 'Michael Hart', date: '2022-11-15', time: '18:00' },
+        { id: 36, name: 'Perry Scope', email: 'ps@gmail.com', service: 'Dentistry', doctor: 'Harry Kane', date: '2022-11-15', time: '17:45' }
+    ]
 
-    // const _data = [
-    //     { service: 'Cardiology', doctor: 'John Smith' },
-    //     { service: 'Eye Care', doctor: 'Michael Hart' },
-    //     { service: 'Dentistry', doctor: 'Harry Kane' },
-    //     { service: 'Virology', doctor: 'Mason Mount' },
-    //     { service: 'Hepatology', doctor: 'Thomas Aglio' },
-    //     { service: 'Urology', doctor: 'Terry Dubrow' }
-    // ]
+    const servicesData = [
+        { title: 'Cardiology' },
+        { title: 'Eye Care' },
+        { title: 'Dentistry' },
+        { title: 'Virology' },
+        { title: 'Hepatology' },
+        { title: 'Urology' }
+    ]
+
+    const doctorsData = [
+        { name: 'John Smith', designation: 'Cardiologist' },
+        { name: 'Michael Hart', designation: 'Eye Specialist' },
+        { name: 'Harry Kane', designation: 'Virologist' },
+        { name: 'Mason Mount', designation: 'Dental Surgeon' },
+        { name: 'Thomas Aglio', designation: 'Hepatologist' },
+        { name: 'Terry Dubrow', designation: 'Urologist' }
+    ]
 
     const _columns = [
         { Header: 'Id', accessor: 'id' },
@@ -68,7 +75,6 @@ const Appointments = () => {
         { Header: 'Time', accessor: 'time', disableFilters: true }
     ]
 
-    const { authTokens, logout } = useContext(AuthContext);
     const [formData, setFormData] = useState({});
     const [appointments, setAppointments] = useState(null);
     const [appointment, setAppointment] = useState(null);
@@ -77,10 +83,9 @@ const Appointments = () => {
     const [doctors, setDoctors] = useState(null);
 
     useEffect(() => {
-        FetchRequest('http://127.0.0.1:8000/appointments/', authTokens, setAppointments, null, logout);
-        FetchRequest('http://127.0.0.1:8000/services/', authTokens, setServices, null, logout);
-        FetchRequest('http://127.0.0.1:8000/doctors/', authTokens, setDoctors, null, logout);
-        // FetchRequest(`http://127.0.0.1:8000/appointments/${1}/`, authTokens, setAppointment, null, logout);
+        setAppointments(recentAppointments);
+        setServices(servicesData);
+        setDoctors(doctorsData);
     }, [appointment])
 
     const handleChange = (e) => {
@@ -91,10 +96,17 @@ const Appointments = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // setAppointments(prevValue => [...prevValue, formData]);
-        // setFormData({});
+        const rowData = {
+            id: uuidv4(),
+            name: formData.name,
+            email: formData.email,
+            service: formData.service,
+            doctor: formData.doctor,
+            date: formData.date,
+            time: formData.time,
+        };
 
-        PostRequest('http://127.0.0.1:8000/appointments/add/', authTokens, formData, setAppointment);
+        setAppointments(prevValue => [...prevValue, rowData]);
         setFormData({});
     }
 
@@ -126,21 +138,15 @@ const Appointments = () => {
     }
 
     const handleUpdate = () => {
-        const id = Number(document.querySelector('#id').value);
-        // setAppointments(appointments.filter(appointment => appointment.id != id));
-        // setAppointments(prevValue => [...prevValue, formData]);
-        // resetForm();
-
-        PostRequest(`http://127.0.0.1:8000/appointments/update/${id}/`, authTokens, formData, setAppointment);
+        const id = document.querySelector('#id').value;
+        setAppointments(appointments.filter(appointment => appointment.id != id));
+        setAppointments(prevValue => [...prevValue, formData]);
         resetForm();
     }
 
     const handleDelete = () => {
-        const id = Number(document.querySelector('#id').value);
-        // setAppointments(appointments.filter(appointment => appointment.id != id));
-        // resetForm();
-
-        PostRequest(`http://127.0.0.1:8000/appointments/delete/${id}/`, authTokens, formData, setAppointment);
+        const id = document.querySelector('#id').value;
+        setAppointments(appointments.filter(appointment => appointment.id != id));
         resetForm();
     }
 
@@ -149,7 +155,7 @@ const Appointments = () => {
             <AppointmentsFormStyled>
                 <form onSubmit={(e) => handleSubmit(e, setAppointments, setFormData, formData)}>
                     <h2 id="appointmentForm">Appointment Details</h2>
-                    <input type="number" id="id" value={formData.id || ''} onChange={(e) => handleChange(e, setFormData)} style={{ display: 'none' }} />
+                    <input type="text" id="id" value={formData.id || ''} onChange={(e) => handleChange(e, setFormData)} style={{ display: 'none' }} />
                     <section>
                         <div>
                             <label htmlFor="name">Name <span>(Required)</span></label>

@@ -26,6 +26,6 @@ export const LightTheme = {
         border: 'rgba(0, 0, 0, 0.1)',
     },
     reactTable: {
-        btnSecBg: '#b5b1b1'
+        btnSecBg: '#ede6e6'
     }
 }
