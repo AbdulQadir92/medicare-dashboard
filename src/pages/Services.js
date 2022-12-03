@@ -1,9 +1,8 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { ServicesFormStyled, Description, NoData } from "../styles/components/services/ServicesForm.styled";
 import { CancelButton, DeleteButton, Button } from "../styles/components/FormButttons.styled";
 import ReactTable from "../components/reactTable/ReactTable";
 import DeleteModal from "../components/DeleteModal";
-import AuthContext from "../contexts/AuthContext";
 import { v4 as uuidv4 } from 'uuid';
 
 import heartBeat from '../images/services/heartBeat-min.png';

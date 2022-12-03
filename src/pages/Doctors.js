@@ -3,10 +3,7 @@ import { DoctorsFormStyled, NoData } from "../styles/components/doctors/DoctorsF
 import { CancelButton, DeleteButton, Button } from "../styles/components/FormButttons.styled";
 import ReactTable from "../components/reactTable/ReactTable";
 import DeleteModal from "../components/DeleteModal";
-import AuthContext from "../contexts/AuthContext";
-import PostFormData from "../requests/PostFormData";
-import FetchRequest from "../requests/FetchRequest";
-import PostRequest from "../requests/PostRequest";
+import { v4 as uuidv4 } from 'uuid';
 
 import doctor1 from '../images/doctors/doctor1-min.jpg';
 import doctor2 from '../images/doctors/doctor2-min.jpg';
@@ -17,24 +14,23 @@ import doctor6 from '../images/doctors/doctor6-min.jpg';
 
 
 const Doctors = () => {
-    // const desc = 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit'
-    // const data = [
-    //     { id: 1, doctorName: 'Jone Smith', doctorImg: doctor1, designation: 'Cardiologist', description: desc },
-    //     { id: 2, doctorName: 'Michael Hart', doctorImg: doctor2, designation: 'Eye Specialist', description: desc },
-    //     { id: 3, doctorName: 'Mason Mount', doctorImg: doctor3, designation: 'Virologist', description: desc },
-    //     { id: 4, doctorName: 'Harry Kane', doctorImg: doctor4, designation: 'Dental Surgeon', description: desc },
-    //     { id: 5, doctorName: 'Thomas Aglio', doctorImg: doctor5, designation: 'Hepatologist', description: desc },
-    //     { id: 6, doctorName: 'Terry Dubrow', doctorImg: doctor6, designation: 'Urologist', description: desc }
-    // ]
+    const desc = 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit'
+    const doctorsData = [
+        { id: 1, doctorName: 'Jone Smith', doctorImg: doctor1, designation: 'Cardiologist', description: desc },
+        { id: 2, doctorName: 'Michael Hart', doctorImg: doctor2, designation: 'Eye Specialist', description: desc },
+        { id: 3, doctorName: 'Mason Mount', doctorImg: doctor3, designation: 'Virologist', description: desc },
+        { id: 4, doctorName: 'Harry Kane', doctorImg: doctor4, designation: 'Dental Surgeon', description: desc },
+        { id: 5, doctorName: 'Thomas Aglio', doctorImg: doctor5, designation: 'Hepatologist', description: desc },
+        { id: 6, doctorName: 'Terry Dubrow', doctorImg: doctor6, designation: 'Urologist', description: desc }
+    ]
 
     const _columns = [
         { Header: 'Id', accessor: 'id' },
-        { Header: 'Name', accessor: 'name' },
+        { Header: 'Name', accessor: 'doctorName' },
         {
             Header: 'Image', Cell: tableProps => (
                 <div>
-                    {/* <img src={tableProps.row.original.doctorImg} alt="..." width="50" height="50" /> */}
-                    <img src={`http://127.0.0.1:8000${tableProps.row.original.image}`} alt="..." width="40" height="40" />
+                    <img src={tableProps.row.original.doctorImg} alt="..." width="50" height="50" />
                 </div>
             )
         },
@@ -42,14 +38,13 @@ const Doctors = () => {
         { Header: 'Description', accessor: 'description' }
     ]
 
-    const { authTokens, logout } = useContext(AuthContext);
     const [formData, setFormData] = useState({});
     const [doctors, setDoctors] = useState(null);
     const [doctor, setDoctor] = useState(null);
     const [saveBtn, setSaveBtn] = useState(true);
 
     useEffect(() => {
-        FetchRequest('http://127.0.0.1:8000/doctors/', authTokens, setDoctors, null, logout);
+        setDoctors(doctorsData)
     }, [doctor])
 
     const handleChange = (e) => {
@@ -60,16 +55,15 @@ const Doctors = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // setDoctors(prevValue => [...prevValue, formData]);
+        const rowData = {
+            id: uuidv4(),
+            doctorName: formData.doctorName,
+            doctorImg: formData.doctorImg,
+            designation: formData.designation,
+            description: formData.description,
+        };
 
-        const doctorImg = document.querySelector('#doctorImg').files[0];
-        const data = new FormData();
-        data.append('name', formData.doctorName);
-        data.append('image', doctorImg);
-        data.append('designation', formData.designation);
-        data.append('description', formData.description);
-
-        PostFormData('http://127.0.0.1:8000/doctors/add/', authTokens, data, setDoctor);
+        setDoctors(prevValue => [...prevValue, rowData]);
         setFormData({});
     }
 
@@ -95,26 +89,14 @@ const Doctors = () => {
 
     const handleUpdate = () => {
         const id = document.querySelector('#id').value;
-        // setDoctors(doctors.filter(doctor => doctor.id != id));
-        // setDoctors(prevValue => [...prevValue, formData]);
-        // resetForm();
-
-        const doctorImg = document.querySelector('#doctorImg').files[0];
-        const data = new FormData();
-        data.append('name', formData.doctorName);
-        data.append('image', doctorImg);
-        data.append('designation', formData.designation);
-        data.append('description', formData.description);
-
-        PostFormData(`http://127.0.0.1:8000/doctors/update/${id}/`, authTokens, data, setDoctor);
+        setDoctors(doctors.filter(doctor => doctor.id != id));
+        setDoctors(prevValue => [...prevValue, formData]);
         resetForm();
     }
 
     const handleDelete = () => {
         const id = document.querySelector('#id').value;
-        // setDoctors(doctors.filter(doctor => doctor.id != id));
-        // resetForm();
-        PostRequest(`http://127.0.0.1:8000/doctors/delete/${id}/`, authTokens, {}, setDoctor);
+        setDoctors(doctors.filter(doctor => doctor.id != id));
         resetForm();
     }
 
@@ -123,7 +105,7 @@ const Doctors = () => {
             <DoctorsFormStyled>
                 <form onSubmit={handleSubmit}>
                     <h2 id="doctorForm">Doctor Details</h2>
-                    <input type="number" id="id" value={formData.id || ''} onChange={(e) => handleChange(e, setFormData)} style={{ display: 'none' }} />
+                    <input type="text" id="id" value={formData.id || ''} onChange={(e) => handleChange(e, setFormData)} style={{ display: 'none' }} />
                     <section>
                         <div>
                             <label htmlFor="id">Name <span>(Required)</span></label>
