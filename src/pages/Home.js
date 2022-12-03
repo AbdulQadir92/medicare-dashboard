@@ -8,7 +8,8 @@ import BarChart from '../components/charts/BarChart';
 import DoughnutChart from '../components/charts/DoughtnulChart';
 import { BarData, DoughnutData } from '../components/charts/Data';
 import { defaults } from 'chart.js';
-import recentAppointments from '../recentAppointments.json';
+// import recentAppointments from '../recentAppointments.json';
+import AppointmentsData from '../appointmenstData.json';
 
 
 const Home = () => {
@@ -87,7 +88,7 @@ const Home = () => {
                     </div>
                 </DoughnutChartStyled>
             </Charts>
-            <ReactTable heading="Recent Appointments" _columns={_columns} _data={recentAppointments} _checkbox={false} />
+            <ReactTable heading="Recent Appointments" _columns={_columns} _data={AppointmentsData} _checkbox={false} />
         </HomeStyled>
     )
 }
