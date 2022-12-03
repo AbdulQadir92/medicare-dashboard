@@ -1,12 +1,10 @@
-import { useState, useEffect, useContext, useReducer } from "react";
+import { useState, useEffect, useContext } from "react";
 import { ServicesFormStyled, Description, NoData } from "../styles/components/services/ServicesForm.styled";
 import { CancelButton, DeleteButton, Button } from "../styles/components/FormButttons.styled";
 import ReactTable from "../components/reactTable/ReactTable";
 import DeleteModal from "../components/DeleteModal";
 import AuthContext from "../contexts/AuthContext";
-import FetchRequest from "../requests/FetchRequest";
-import PostRequest from "../requests/PostRequest";
-import PostFormData from "../requests/PostFormData";
+import { v4 as uuidv4 } from 'uuid';
 
 import heartBeat from '../images/services/heartBeat-min.png';
 import eyeCare from '../images/services/eyeCare-min.png';
@@ -15,45 +13,26 @@ import virology from '../images/services/virology-min.png';
 import hepatology from '../images/services/hepatology-min.png';
 import urology from '../images/services/urology-min.png';
 
+
 const Services = () => {
-    // const desc = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus quis animi, consequatur fugit porro recusandae. Facilis quis assumenda obcaecati fugiat eaque, dicta repellat maxime laboriosam eos, distinctio et deserunt enim.';
-    // const servicesData = [
-    //     { id: 1, title: 'Cardiology', image: heartBeat, description: { p1: desc, p2: desc, p3: desc } },
-    //     { id: 2, title: 'Eye Care', image: eyeCare, description: { p1: desc, p2: desc, p3: desc } },
-    //     { id: 3, title: 'Dentistry', image: dentistry, description: { p1: desc, p2: desc, p3: desc } },
-    //     { id: 4, title: 'Virology', image: virology, description: { p1: desc, p2: desc, p3: desc } },
-    //     { id: 5, title: 'Hepatology', image: hepatology, description: { p1: desc, p2: desc, p3: desc } },
-    //     { id: 6, title: 'Urology', image: urology, description: { p1: desc, p2: desc, p3: desc } }
-    // ];
+    const desc = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus quis animi, consequatur fugit porro recusandae. Facilis quis assumenda obcaecati fugiat eaque, dicta repellat maxime laboriosam eos, distinctio et deserunt enim.';
+    const servicesData = [
+        { id: 1, title: 'Cardiology', image: heartBeat, description: { p1: desc, p2: desc, p3: desc } },
+        { id: 2, title: 'Eye Care', image: eyeCare, description: { p1: desc, p2: desc, p3: desc } },
+        { id: 3, title: 'Dentistry', image: dentistry, description: { p1: desc, p2: desc, p3: desc } },
+        { id: 4, title: 'Virology', image: virology, description: { p1: desc, p2: desc, p3: desc } },
+        { id: 5, title: 'Hepatology', image: hepatology, description: { p1: desc, p2: desc, p3: desc } },
+        { id: 6, title: 'Urology', image: urology, description: { p1: desc, p2: desc, p3: desc } }
+    ];
 
-
-
-    const { authTokens, logout } = useContext(AuthContext);
     const [services, setServices] = useState(null);
     const [service, setService] = useState(null);
     const [formData, setFormData] = useState({});
     const [saveBtn, setSaveBtn] = useState(true);
 
     useEffect(() => {
-        FetchRequest('http://127.0.0.1:8000/services/', authTokens, formatData, null, logout)
+        setServices(servicesData);
     }, [service])
-
-    const formatData = (data) => {
-        const servicesFormated = data.map(service => {
-            const obj = {
-                id: service.id,
-                title: service.title,
-                image: service.image,
-                description: {
-                    p1: service.p1,
-                    p2: service.p2,
-                    p3: service.p3
-                }
-            }
-            return obj
-        })
-        setServices(servicesFormated);
-    }
 
     const _columns = [
         { Header: 'Id', accessor: 'id' },
@@ -61,8 +40,7 @@ const Services = () => {
         {
             Header: 'Image', Cell: tableProps => (
                 <div>
-                    {/* <img src={tableProps.row.original.image} alt="..." width="40" height="40" /> */}
-                    <img src={`http://127.0.0.1:8000${tableProps.row.original.image}`} alt="..." width="40" height="40" />
+                    <img src={tableProps.row.original.image} alt="..." width="40" height="40" />
                 </div>
             )
         },
@@ -86,29 +64,18 @@ const Services = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // const rowData = {
-        //     id: formData.id,
-        //     title: formData.title,
-        //     image: formData.image,
-        //     description: {
-        //         p1: formData.p1,
-        //         p2: formData.p2,
-        //         p3: formData.p3
-        //     }
-        // };
-        // setServices(prevValue => [...prevValue, rowData]);
-
-        const image = document.querySelector('#image').files[0];
-        const data = new FormData();
-        data.append('title', formData.title);
-        data.append('image', image);
-        data.append('p1', formData.p1);
-        data.append('p2', formData.p2);
-        data.append('p3', formData.p3);
-
-        PostFormData('http://127.0.0.1:8000/services/add/', authTokens, data, setService);
+        const rowData = {
+            id: uuidv4(),
+            title: formData.title,
+            image: formData.image,
+            description: {
+                p1: formData.p1,
+                p2: formData.p2,
+                p3: formData.p3
+            }
+        };
+        setServices(prevValue => [...prevValue, rowData]);
         setFormData({});
-
     }
 
     const fillForm = (tr) => {
@@ -137,35 +104,24 @@ const Services = () => {
 
     const handleUpdate = () => {
         const id = document.querySelector('#id').value;
-        // setServices(services.filter(service => service.id != id));
-        // const rowData = {
-        //     id: formData.id,
-        //     title: formData.title,
-        //     image: formData.image,
-        //     description: {
-        //         p1: formData.p1,
-        //         p2: formData.p2,
-        //         p3: formData.p3
-        //     }
-        // };
-        // setServices(prevValue => [...prevValue, rowData]);
-
-        const image = document.querySelector('#image').files[0];
-        const data = new FormData();
-        data.append('title', formData.title);
-        data.append('image', image);
-        data.append('p1', formData.p1);
-        data.append('p2', formData.p2);
-        data.append('p3', formData.p3);
-
-        PostFormData(`http://127.0.0.1:8000/services/update/${id}/`, authTokens, data, setService);
+        setServices(services.filter(service => service.id != id));
+        const rowData = {
+            id: formData.id,
+            title: formData.title,
+            image: formData.image,
+            description: {
+                p1: formData.p1,
+                p2: formData.p2,
+                p3: formData.p3
+            }
+        };
+        setServices(prevValue => [...prevValue, rowData]);
         resetForm();
     }
 
     const handleDelete = () => {
         const id = document.querySelector('#id').value;
-        // setServices(services.filter(service => service.id != id));
-        PostRequest(`http://127.0.0.1:8000/services/delete/${id}/`, authTokens, {}, setService);
+        setServices(services.filter(service => service.id != id));
         resetForm();
     }
 
@@ -174,7 +130,7 @@ const Services = () => {
             <ServicesFormStyled>
                 <form onSubmit={handleSubmit}>
                     <h2 id="serviceForm">Service Details</h2>
-                    <input type="number" id="id" value={formData.id || ''} onChange={(e) => handleChange(e, setFormData)} style={{ display: 'none' }} />
+                    <input type="text" id="id" value={formData.id || ''} onChange={(e) => handleChange(e, setFormData)} style={{ display: 'none' }} />
                     <section>
                         <div>
                             <label htmlFor="title">Title <span>(Required)</span></label>

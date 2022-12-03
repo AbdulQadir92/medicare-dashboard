@@ -4,11 +4,11 @@ import Card from '../components/home/Card';
 import { faHandHoldingMedical, faUserDoctor, faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
 import ReactTable from '../components/reactTable/ReactTable';
 import { format } from 'date-fns';
-import recentAppointments from '../recentAppointments.json';
 import BarChart from '../components/charts/BarChart';
 import DoughnutChart from '../components/charts/DoughtnulChart';
 import { BarData, DoughnutData } from '../components/charts/Data';
 import { defaults } from 'chart.js';
+import recentAppointments from '../recentAppointments.json';
 
 
 const Home = () => {
