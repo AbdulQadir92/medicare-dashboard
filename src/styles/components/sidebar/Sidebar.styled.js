@@ -141,8 +141,13 @@ export const BrandLi = styled(Li)`
     }
 
     a span:first-child {
-        color: #EB1D36;
-        font-size: 35px;
+        /* color: #EB1D36; */
+        /* font-size: 35px; */
+
+        img {
+            width: 35px;
+            height: 35px;
+        }
     }
 
     a span:last-child {

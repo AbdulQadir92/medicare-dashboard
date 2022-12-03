@@ -3,7 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { SidebarStyled, SidebarUL, BrandLi, Li } from "../../styles/components/sidebar/Sidebar.styled";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeartPulse, faHome, faHandHoldingMedical, faUserDoctor, faCalendarCheck, faEnvelope, faClose } from '@fortawesome/free-solid-svg-icons';
+import { faHeartPulse, faHome, faHandHoldingMedical, faUserDoctor, faCalendarCheck, faClose } from '@fortawesome/free-solid-svg-icons';
+import brand from '../../images/sidebar/brand.png';
 
 
 const Sidebar = () => {
@@ -78,7 +79,8 @@ const Sidebar = () => {
                 <BrandLi>
                     <Link to="#">
                         <span>
-                            <FontAwesomeIcon icon={faHeartPulse} />
+                            {/* <FontAwesomeIcon icon={faHeartPulse} /> */}
+                            <img src={brand} alt="Logo" />
                         </span>
                         <span>MediCare</span>
                     </Link>
