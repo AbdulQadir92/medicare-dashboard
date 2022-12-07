@@ -75,7 +75,7 @@ export const Password = styled.div`
     }
 `
 
-export const Message = styled.span`
+export const Message = styled.div`
     font-size: 13px;
     color: #DE3163;
     margin-top: 5px;

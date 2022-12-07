@@ -12,27 +12,28 @@ const Sidebar = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (loading) {
-            firstLoad();
-            setLoading(false);
-        }
-
         activePage();
+        // if (loading) {
+        //     firstLoad();
+        // }
     }, [])
 
-    const firstLoad = () => {
-        const lis = document.querySelectorAll('#sidebar li:not(:first-child)');
-        lis.forEach((li) => {
-            const currentPath = location.pathname;
-            const linkPath = li.firstElementChild.href.slice(li.firstElementChild.href.lastIndexOf('/'));
+    // const firstLoad = () => {
+    //     const lis = document.querySelectorAll('#sidebar li:not(:first-child)');
+    //     lis.forEach((li) => {
+    //         const currentPath = location.pathname;
+    //         const linkPath = li.firstElementChild.href.slice(li.firstElementChild.href.lastIndexOf('/'));
 
-            if (currentPath === linkPath) {
-                li.classList.add('active');
-            } else {
-                li.classList.remove('active');
-            }
-        })
-    }
+    //         if (currentPath === linkPath) {
+    //             li.classList.add('active');
+    //             console.log('if');
+    //         } else {
+    //             li.classList.remove('active');
+    //             console.log('else');
+    //         }
+    //     })
+    //     setLoading(false);
+    // }
 
     const toggleSidebar = (e) => {
         e.stopPropagation();
@@ -79,7 +80,6 @@ const Sidebar = () => {
                 <BrandLi>
                     <Link to="#">
                         <span>
-                            {/* <FontAwesomeIcon icon={faHeartPulse} /> */}
                             <img src={brand} alt="Logo" />
                         </span>
                         <span>MediCare</span>
