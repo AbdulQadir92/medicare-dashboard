@@ -4,8 +4,11 @@ export const DarkTheme = {
     colors: {
         mainColor: '#6495ED',
 
-        mainBg: 'rgb(1, 2, 13)',
-        secBg: 'rgb(1, 4, 23)',
+        // mainBg: 'rgb(1, 2, 13)',
+        // secBg: 'rgb(1, 4, 23)',
+
+        mainBg: '#060f18',
+        secBg: '#07121c',
 
         lightText: '#000',
 
